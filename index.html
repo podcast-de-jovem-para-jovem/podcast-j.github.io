@@ -136,7 +136,7 @@
             <h2>Contato</h2>
             <p>Entre em contato conosco para feedback, sugestões ou qualquer dúvida.</p>
             <!-- Atualize o formulário para enviar dados para o script PHP -->
-            <form action="send_email.php" method="post"> <!-- Define o arquivo PHP que processará o formulário e o método POST para enviar dados -->
+            <form id="my-form"> <!-- Define o arquivo PHP que processará o formulário e o método POST para enviar dados -->
                 <label for="name">Nome:</label><br>
                 <input type="text" id="name" name="name" required><br><br>
                 <label for="email">Email:</label><br>
@@ -160,6 +160,21 @@
     </footer>
 </body>
     <script type="text/javascript">
-        document.getElementById("demo").innerHTML = "Hello JavaScript!";
+        var form = document.getElementById('my-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var data = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://podcast-de-jovem-para-jovem.github.io/podcast-j.github.io/send_email.php');
+            xhr.onload = function() {
+            if (xhr.status === 200) {
+                // if the response is json encoded
+                alert("ok");
+            } else {
+                alert("error")
+            }
+        }
+        xhr.send(data); 
+        }
     </script>
 </html>
